@@ -1,6 +1,5 @@
 package com.wms.config;
 
-import com.wms.core.exceptions.WMSException;
 import com.wms.core.security.*;
 import com.wms.core.utils.applicationcontext.ApplicationContextUtil;
 import com.wms.core.utils.common.ObjectUtils;
@@ -19,7 +18,6 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.authentication.AuthenticationWebFilter;
 import org.springframework.security.web.server.authorization.AuthorizationContext;
 
-import java.util.List;
 import java.util.Map;
 
 
@@ -39,7 +37,6 @@ public class SecurityConfig {
 	public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) throws Exception{
 		AuthenticationWebFilter authentication =
 				new AuthenticationWebFilter(new UserDetailsRepositoryReactiveAuthenticationManager(userDetailsService()));
-		authentication.setAuthenticationConverter(new ServerMonoAuthenticationConverter());
 		http
 				.authorizeExchange()
 				.pathMatchers("/**/*.jpg", "/**/*.png", "/**/*.gif",
@@ -62,7 +59,6 @@ public class SecurityConfig {
 				.pathMatchers("/console/*")
 				.authenticated().and()
 				.formLogin().loginPage("/login")
-				.authenticationSuccessHandler(new WebFilterChainServerJWTAuthenticationSuccessHandler())
 				.and()
 				.csrf().disable()
 				.logout();

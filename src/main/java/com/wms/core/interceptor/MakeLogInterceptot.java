@@ -50,10 +50,12 @@ public class MakeLogInterceptot {
             }
             if (ObjectUtils.isNotEmpty(returnValue)
                     && ObjectUtils.isNotEmpty(request)) {
-                Log log =  new Log(begin,end,RequestUtil.getBrowser(request),RequestUtil.getOs(request),
-                        spend,clazz.getName(),method.getName(),MacUtil.getIpAddr(request),
-                        userName,InterceptUtil.getOperaterDesc(proceedingJoinPoint),Option.empty());
-                new LogRepo().insertLog(log).block();
+                if(ObjectUtils.isNotEmpty(InterceptUtil.getOperaterDesc(proceedingJoinPoint))) {
+                    Log log = new Log(begin, end, RequestUtil.getBrowser(request), RequestUtil.getOs(request),
+                            spend, clazz.getName(), method.getName(), MacUtil.getIpAddr(request),
+                            userName, InterceptUtil.getOperaterDesc(proceedingJoinPoint), Option.empty());
+                    new LogRepo().insertLog(log).block();
+                }
             }
         }
         return returnValue;

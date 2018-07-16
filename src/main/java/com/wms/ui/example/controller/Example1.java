@@ -14,7 +14,6 @@ import java.security.Principal;
 public class Example1 {
 
     @GetMapping("/index")
-    @MakeLog(operateDesc="have test",operateVars = {})
     public Mono<String> hello(ServerWebExchange exchange, Principal principal) {
         //new UserRepo().findEntityById(1).map(r -> Json.toJson(r.get(),UserRepo.userFormat())).subscribe(System.out::println);
         //new UserRepo().countEntity().subscribe(System.out::println);

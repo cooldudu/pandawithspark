@@ -8,6 +8,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)  
 public @interface MakeLog {
-	public String operateDesc();
-	public String[] operateVars();
+	public String logContent();
 }

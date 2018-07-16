@@ -81,23 +81,23 @@ object UserRepo extends UserRepo{
     Flux.from(dbUtil.getStream(action))
   }
 
-  def deleteByUserNameLikeWithExec(userName:String):Mono[Int] = {
+  def deleteByUserNameLike(userName:String):Mono[Int] = {
     val action = tableQuery.filter(_.userName like userName).delete
     Mono.fromFuture(dbUtil.getFuture(action).toJava.toCompletableFuture)
   }
 
-  def findIdByUserNameWithExec(userName:String):Flux[Int] = {
+  def findIdByUserName(userName:String):Flux[Int] = {
     val action = tableQuery.filter(_.userName === userName).map(_.id).result
     Flux.from(dbUtil.getStream(action))
   }
 
-  def findAllByPageableWithExec(offset:Int,rows : Int):Flux[User] = {
+  def findAllByPageable(offset:Int,rows : Int):Flux[User] = {
     val action = tableQuery.drop(offset).take(rows).sortBy(_.id.desc).result
     println(action.statements.head)
     Flux.from(dbUtil.getStream(action))
   }
 
-  def findAllByPageableWithExec(page:Pageable):Flux[User] ={
+  def findAllByPageable(page:Pageable):Flux[User] ={
     val sort  = page.getSort.iterator().next()
     val action = tableQuery.drop(page.getOffset).take(page.getPageSize)
     if(sort.isAscending){
@@ -108,38 +108,38 @@ object UserRepo extends UserRepo{
     Flux.from(dbUtil.getStream(action.result))
   }
 
-  def findMaxIdWithExec:Flux[Int]={
+  def findMaxId:Flux[Int]={
     val action = tableQuery.map(_.id)
     val maxAction = action.max.result
     println(maxAction.statements.mkString)
     Flux.from(dbUtil.getStream(action.result))
   }
 
-  def getByUserNameWithSqlExec(userName:String):Flux[User] = {
+  def getByUserNameWithSql(userName:String):Flux[User] = {
     val action = sql"select * from t_users where userName = $userName".as[User]
     Flux.from(dbUtil.getStream(action))
   }
 
-  def createTableWithExec={
+  def createTable={
     val action = tableQuery.schema.create
     Mono.fromFuture(dbUtil.getFuture(action).toJava.toCompletableFuture)
   }
 
-  def batchInsertUserWithExec(users:Seq[User])={
+  def batchInsertUser(users:Seq[User])={
     val action = tableQuery ++= users
     Mono.fromFuture(dbUtil.getFuture(action).toJava.toCompletableFuture)
   }
 
-  def insertUserWithExec(user:User):Mono[Int] = {
+  def insertUser(user:User):Mono[Int] = {
     val action = tableQuery returning tableQuery.map(_.id) += user
     Mono.fromFuture(dbUtil.getFuture(action).toJava.toCompletableFuture)
   }
 
-  def fetchAllWithExec():Flux[User]={
+  def fetchAll():Flux[User]={
     Flux.from(dbUtil.getStream(this.fetchAll()))
   }
 
-  def createAndBatchInsertUserWithExec(users : Seq[User])={
+  def createAndBatchInsertUser(users : Seq[User])={
     val actions =(
       tableQuery.schema.create >>
         (tableQuery ++= users)
@@ -147,20 +147,20 @@ object UserRepo extends UserRepo{
     Mono.fromFuture(dbUtil.getFuture(actions.asTry).toJava.toCompletableFuture)
   }
 
-  def findByUserNameOrIdWithExec(userName:String,id :Int):Flux[User] = {
+  def findByUserNameOrId(userName:String,id :Int):Flux[User] = {
     val action = tableQuery.filter{user =>
       List(user.userName === userName,user.id === id).reduceLeftOption(_ || _).getOrElse(true: Rep[Boolean])
     }
     Flux.from(dbUtil.getStream(action.result))
   }
 
-  def updateUserNameByIdWithExec(id:Int,userName:String) = {
+  def updateUserNameById(id:Int,userName:String) = {
     val action = tableQuery.filter(_.id === id).map(_.userName)
     val f = action.update("admin")
     Mono.fromFuture(dbUtil.getFuture(f).toJava.toCompletableFuture)
   }
 
-  def findFirstByUserNameWithExec(userName:String):Mono[Option[User]] = {
+  def findFirstByUserName(userName:String):Mono[Option[User]] = {
     val action = tableQuery.filter(_.userName === userName).result.headOption
     Mono.fromFuture(dbUtil.getFuture(action).toJava.toCompletableFuture)
   }

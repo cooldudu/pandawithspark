@@ -5,17 +5,12 @@ import java.lang.reflect.Method;
 import java.security.Principal;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
 
-import com.wms.core.annotation.UserOperateInfo;
+import com.wms.core.annotation.MakeLog;
 import com.wms.core.utils.common.ObjectUtils;
 import com.wms.core.utils.common.StringUtil;
-import org.springframework.web.reactive.function.server.ServerResponse;
-import org.springframework.web.server.ServerWebExchange;
-import reactor.core.publisher.Mono;
 
 public class InterceptUtil {
 	public static Object getMethodArg(ProceedingJoinPoint proceedingJoinPoint,
@@ -66,7 +61,7 @@ public class InterceptUtil {
 
 	public static String getCurrentUserName(
 			ProceedingJoinPoint proceedingJoinPoint)
-			throws IllegalArgumentException, SecurityException{
+			throws Exception{
 		Object[] args = proceedingJoinPoint.getArgs();
 		for(Object arg:args){
 			if(arg instanceof Principal){
@@ -81,16 +76,13 @@ public class InterceptUtil {
 	}
 
 	public static String getOperaterDesc(ProceedingJoinPoint proceedingJoinPoint)
-			throws SecurityException, ClassNotFoundException,
-			IllegalArgumentException, IllegalAccessException,
-			InvocationTargetException, NoSuchMethodException {
+			throws SecurityException,IllegalArgumentException {
 		MethodSignature signature = (MethodSignature) proceedingJoinPoint
 				.getSignature();
 		Method method = signature.getMethod();
-		// Class<?> clazz = proceedingJoinPoint.getTarget().getClass();
 		Object[] args = proceedingJoinPoint.getArgs();
-		UserOperateInfo annotation = (UserOperateInfo) method
-				.getAnnotation(UserOperateInfo.class);
+		MakeLog annotation = (MakeLog) method
+				.getAnnotation(MakeLog.class);
 		if (ObjectUtils.isNotEmpty(annotation)) {
 			String operaterDesc = annotation.operateDesc();
 			String[] operateVars = annotation.operateVars();

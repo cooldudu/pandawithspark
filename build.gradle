@@ -99,6 +99,7 @@ dependencies {
     compile "com.typesafe.play:play-json_2.11:2.6.9"
     compile "com.wix:accord-core_2.11:0.7.2"
     compile "com.wix:accord-api_2.11:0.7.2"
+    compile "is.tagomor.woothee:woothee-java:1.7.0"
     runtime "mysql:mysql-connector-java:5.1.46"
     runtime "org.springframework.boot:spring-boot-devtools"
     providedRuntime "org.springframework.boot:spring-boot-starter-undertow"

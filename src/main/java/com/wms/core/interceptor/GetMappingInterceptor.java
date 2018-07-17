@@ -13,7 +13,7 @@ public class GetMappingInterceptor {
 	@Around("@annotation(org.springframework.web.bind.annotation.GetMapping)")
 	public Object doExecute(ProceedingJoinPoint proceedingJoinPoint)
 			throws Throwable {
-			Object returnValue = proceedingJoinPoint.proceed();
+			var returnValue = proceedingJoinPoint.proceed();
 			return returnValue;
 	}
 }

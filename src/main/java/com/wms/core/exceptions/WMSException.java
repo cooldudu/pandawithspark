@@ -16,7 +16,7 @@ public class WMSException extends Exception
 	{
 		super(message);
 		printStackTrace();
-		Log log = LogFactory.getLog(this.getClass());
+		var log = LogFactory.getLog(this.getClass());
 		log.error(message);
 	}
 
@@ -24,7 +24,7 @@ public class WMSException extends Exception
 	{
 		super(message, throwable);
 		printStackTrace();
-		Log log = LogFactory.getLog(this.getClass());
+		var log = LogFactory.getLog(this.getClass());
 		log.error(message,throwable);
 	}
 }

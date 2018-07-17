@@ -28,7 +28,7 @@ public class ContextUtils {
 	 * spring mvc下获取response
 	 */
 	public static HttpServletResponse getResponse() {
-		HttpServletResponse response = ((ServletWebRequest) RequestContextHolder
+		var response = ((ServletWebRequest) RequestContextHolder
 				.getRequestAttributes()).getResponse();
 		response.setCharacterEncoding(EncodingType.UTF_8);
 		return response;
@@ -38,7 +38,7 @@ public class ContextUtils {
 	 * spring mvc下获取session
 	 */
 	public static HttpSession getSession() {
-		HttpSession session = getRequest().getSession();
+		var session = getRequest().getSession();
 		return session;
 	}
 }

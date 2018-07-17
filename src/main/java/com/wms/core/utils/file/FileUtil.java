@@ -47,11 +47,11 @@ public class FileUtil {
 	 * @return boolean
 	 */
 	public static boolean newFolder(String folderPath) {
-		boolean result = false;
+		var result = false;
 		try {
-			String filePath = folderPath;
+			var filePath = folderPath;
 			filePath = filePath.toString();
-			File myFilePath = new File(filePath);
+			var myFilePath = new File(filePath);
 			if (!myFilePath.exists()) {
 				result = myFilePath.mkdirs();
 			}
@@ -155,9 +155,9 @@ public class FileUtil {
 	public void createHTML(HttpServletRequest request) throws IOException {
 		java.io.InputStream l_urlStream;
 
-		java.net.URL l_url = new java.net.URL(
+		var l_url = new java.net.URL(
 				"http://localhost:1000/chinavvvcms/luohe.jsp");
-		java.net.HttpURLConnection l_connection = (java.net.HttpURLConnection) l_url
+		var l_connection = (java.net.HttpURLConnection) l_url
 				.openConnection();
 		l_connection.connect();
 
@@ -167,11 +167,11 @@ public class FileUtil {
 		try {
 			l_reader = new java.io.BufferedReader(
 					new java.io.InputStreamReader(l_urlStream,"UTF-8"));
-			String path = request.getSession().getServletContext().getRealPath(".");
+			var path = request.getSession().getServletContext().getRealPath(".");
 			fw = new OutputStreamWriter(new FileOutputStream(path + "\\index.html"), "UTF-8");
 
-			String Line = l_reader.readLine();// 从文件读取一行字符串
-			StringBuffer content = new StringBuffer();
+			var Line = l_reader.readLine();// 从文件读取一行字符串
+			var content = new StringBuffer();
 			// 判断读取到的字符串是否不为空
 			while (Line != null) {
 				Line = Line.trim();
@@ -195,11 +195,11 @@ public class FileUtil {
 	}
 
 	public static boolean isPicFile(String ext) {
-		boolean isJpg = ext.equalsIgnoreCase("jpg");
-		boolean isJpeg = ext.equalsIgnoreCase("jpeg");
-		boolean isPng = ext.equalsIgnoreCase("png");
-		boolean isBmp = ext.equalsIgnoreCase("bmp");
-		boolean isGif = ext.equalsIgnoreCase("gif");
+		var isJpg = ext.equalsIgnoreCase("jpg");
+		var isJpeg = ext.equalsIgnoreCase("jpeg");
+		var isPng = ext.equalsIgnoreCase("png");
+		var isBmp = ext.equalsIgnoreCase("bmp");
+		var isGif = ext.equalsIgnoreCase("gif");
 
 		if (StringUtils.isEmpty(ext)) {
 			return false;
@@ -212,7 +212,7 @@ public class FileUtil {
 	}
 
 	public static String getFileExt(MultipartFile file) {
-		String fileName = file.getOriginalFilename();
+		var fileName = file.getOriginalFilename();
 		if (fileName.indexOf(".") != -1) {
 			return fileName.substring(fileName.lastIndexOf(".") + 1);
 		}
@@ -221,7 +221,7 @@ public class FileUtil {
 
 	public static String getMiniPath(String filePath) {
 		if (filePath.indexOf(".") != -1) {
-			String miniPath = filePath.substring(0, filePath.lastIndexOf("."));
+			var miniPath = filePath.substring(0, filePath.lastIndexOf("."));
 			miniPath += "-mini."
 					+ filePath.substring(filePath.lastIndexOf(".") + 1);
 			return miniPath;
@@ -230,7 +230,7 @@ public class FileUtil {
 	}
 
 	public static String getFileNameFromPath(String filePath) {
-		String fileName = "";
+		var fileName = "";
 		if (filePath.indexOf("\\") != -1) {
 			fileName = filePath.substring(filePath.lastIndexOf("\\") + 1);
 		} else if (filePath.indexOf("/") != -1) {
@@ -242,7 +242,7 @@ public class FileUtil {
 	}
 
 	public static String lowerCaseFilePathExt(String filePath) {
-		StringBuffer result = new StringBuffer(filePath.substring(0,
+		var result = new StringBuffer(filePath.substring(0,
 				filePath.lastIndexOf(".") + 1));
 		result.append(filePath.substring(filePath.lastIndexOf(".") + 1)
 				.toLowerCase());
@@ -251,15 +251,15 @@ public class FileUtil {
 	
 	/**
 	 * 读取文件内容
-	 * @param filePath
+	 * @param file
 	 * @return
 	 * @throws WMSException
 	 */
 	public static String fileContentRead(File file) throws WMSException {
-		Long filelength = file.length();  
-		byte[] filecontent = new byte[filelength.intValue()];
+		Long filelength = file.length();
+		var filecontent = new byte[filelength.intValue()];
 		try {
-			FileInputStream in = new FileInputStream(file);  
+			var in = new FileInputStream(file);
 			in.read(filecontent);  
 			return new String(filecontent);
 		} catch (IOException e) {
@@ -271,16 +271,12 @@ public class FileUtil {
 	public static String processFileName(HttpServletRequest request, String fileNames) {
 		String codedfilename = null;
 		try {
-			String agent = request.getHeader("USER-AGENT");
+			var agent = request.getHeader("USER-AGENT");
 			if (null != agent && -1 != agent.indexOf("MSIE") || null != agent
 					&& -1 != agent.indexOf("Trident")) {// ie
-
-				String name = java.net.URLEncoder.encode(fileNames, "UTF8");
-
+				var name = java.net.URLEncoder.encode(fileNames, "UTF8");
 				codedfilename = name;
 			} else if (null != agent && -1 != agent.indexOf("Mozilla")) {// 火狐,chrome等
-
-
 				codedfilename = new String(fileNames.getBytes("UTF-8"), "iso-8859-1");
 			}
 		} catch (Exception e) {
@@ -288,30 +284,5 @@ public class FileUtil {
 		}
 		return codedfilename;
 	}
-
-//	public static void main(String[] args) {
-//		 String onestr="sampleid,campaignid,accepthone,phone1,phone2,phone3,"
-//				+"hangflag,dellflag,appointflag,updatesequence,lockno,isvalid,isallot,"
-//				 +"importtime,extractseq, dealstaff\r\n";
-//		List<String> simples = new ArrayList<String>();
-//		simples.add(onestr.toString());
-//		simples.add(onestr.toString());
-//		simples.add(onestr.toString());
-//		String path="E:\\tmp\\ss";
-//		String  filename ="tmp.txt";
-////		try {
-////			newFolder(path);
-////			File file = new File(path+"\\"+filename);
-////			FileUtil.creatTxtFile(file);
-//		long begin = System.currentTimeMillis();
-////			FileUtil.appendFile(path+"\\"+filename,onestr);
-//		long end = System.currentTimeMillis();
-//			System.out.println(end-begin);
-////		} catch (IOException e) {
-////			e.printStackTrace();
-////		}
-//
-//
-//	}
 	
 }

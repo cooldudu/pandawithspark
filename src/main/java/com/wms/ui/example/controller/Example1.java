@@ -1,6 +1,5 @@
 package com.wms.ui.example.controller;
 
-import com.wms.core.annotation.MakeLog;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

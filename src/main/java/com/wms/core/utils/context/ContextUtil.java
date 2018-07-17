@@ -14,7 +14,7 @@ public class ContextUtil {
 	 * @return
 	 */
 	public static boolean useDigest(HttpServletRequest request){
-		String contextConfigLocation = request.getSession().getServletContext()
+		var contextConfigLocation = request.getSession().getServletContext()
 				.getInitParameter("contextConfigLocation");
 		if (contextConfigLocation
 				.indexOf("/WEB-INF/applicationContext-digest.xml") != -1){

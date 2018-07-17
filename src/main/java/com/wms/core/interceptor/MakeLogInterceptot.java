@@ -30,9 +30,9 @@ public class MakeLogInterceptot {
         Timestamp end = null;
         Class<?> clazz = null;
         Method method = null;
-        String userName = InterceptUtil.getCurrentUserName(proceedingJoinPoint);
+        var userName = InterceptUtil.getCurrentUserName(proceedingJoinPoint);
         if (StaticData.LOG_ENABLED && !StringUtils.isEmpty(userName)) {
-            MethodSignature signature = (MethodSignature) proceedingJoinPoint
+            var signature = (MethodSignature) proceedingJoinPoint
                     .getSignature();
             clazz = proceedingJoinPoint.getTarget().getClass();
             method = signature.getMethod();
@@ -41,9 +41,9 @@ public class MakeLogInterceptot {
         returnValue = proceedingJoinPoint.proceed();
         if (StaticData.LOG_ENABLED && ObjectUtils.isNotEmpty(userName)) {
             end = new Timestamp(DateTimeUtil.getNow().getTime());
-            long spend = end.getTime() - begin.getTime();
+            var spend = end.getTime() - begin.getTime();
             ServerWebExchange request = null;
-            for (Object object : proceedingJoinPoint.getArgs()) {
+            for (var object : proceedingJoinPoint.getArgs()) {
                 if (object instanceof ServerWebExchange) {
                     request = (ServerWebExchange) object;
                 }
@@ -51,7 +51,7 @@ public class MakeLogInterceptot {
             if (ObjectUtils.isNotEmpty(returnValue)
                     && ObjectUtils.isNotEmpty(request)) {
                 if(ObjectUtils.isNotEmpty(InterceptUtil.getOperaterDesc(proceedingJoinPoint))) {
-                    Log log = new Log(begin, end, RequestUtil.getBrowser(request), RequestUtil.getOs(request),
+                    var log = new Log(begin, end, RequestUtil.getBrowser(request), RequestUtil.getOs(request),
                             spend, clazz.getName(), method.getName(), MacUtil.getIpAddr(request),
                             userName, InterceptUtil.getOperaterDesc(proceedingJoinPoint), Option.empty());
                     new LogRepo().insertLog(log).block();

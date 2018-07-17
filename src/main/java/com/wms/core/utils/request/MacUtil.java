@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class MacUtil {
 	public static String getIpAddr(ServerWebExchange exchange) {
-		String ip = exchange.getRequest().getHeaders().get("Host").get(StaticData.FIRST);
+		var ip = exchange.getRequest().getHeaders().get("Host").get(StaticData.FIRST);
 		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
 			ip = exchange.getRequest().getRemoteAddress().toString();
 		}
@@ -33,15 +33,15 @@ public class MacUtil {
 			ip = "192.168.16.105";
 			return "BC-77-37-E4-16-05";
 		}
-		String str = "";
-		String macAddress = "";
+		var str = "";
+		var macAddress = "";
 		InputStreamReader ir = null;
 		LineNumberReader input = null;
 		try {
-			Process p = Runtime.getRuntime().exec("nbtstat -A " + ip);
+			var p = Runtime.getRuntime().exec("nbtstat -A " + ip);
 			ir = new InputStreamReader(p.getInputStream(),"UTF-8");
 			input = new LineNumberReader(ir);
-			for (int i = 1; i < 100; i++) {
+			for (var i = 1; i < 100; i++) {
 				str = input.readLine();
 				if (str != null) {
 					if (str.indexOf("MAC Address") > 1) {

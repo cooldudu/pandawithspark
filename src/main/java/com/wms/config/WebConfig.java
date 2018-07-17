@@ -42,15 +42,15 @@ public class WebConfig implements WebFluxConfigurer{
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
         registry.freeMarker().suffix(".html");
-        Jackson2JsonEncoder encoder = new Jackson2JsonEncoder();
+        var encoder = new Jackson2JsonEncoder();
         registry.defaultViews(new HttpMessageWriterView(encoder));
     }
 
     @Bean
     public FreeMarkerConfigurer freeMarkerConfigurer() {
-        FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
+        var configurer = new FreeMarkerConfigurer();
         configurer.setTemplateLoaderPath("classpath:/templates/manage");
-        Properties settings = new Properties();
+        var settings = new Properties();
         settings.put("default_encoding", "UTF-8");
         settings.put("output_encoding", "UTF-8");
         configurer.setFreemarkerSettings(settings);

@@ -21,32 +21,4 @@ public class Example2 {
         return Mono.just(principal.getName());
         //return new UserRepo().findIdByUserNameWithExec("user4").collectList();
     }
-//    String index() {
-//        return new Test().abc();
-//    }
-
-//    @GetMapping("/principal")
-//    public String principal(Principal principal) {
-//        return "Hello " + principal.getName();
-//    }
-//
-//    @GetMapping("/principal/mono")
-//    public Mono<String> principalMono(Mono<Principal> principal) {
-//        return principal.map( p -> "Hello " + p.getName());
-//    }
-//
-//    @GetMapping("/userdetails")
-//    public String principal(@AuthenticationPrincipal UserDetails userDetails) {
-//        return "Hello " + userDetails.getName();
-//    }
-//
-//    @GetMapping("/userdetails/mono")
-//    public Mono<String> userDetailsMono(@AuthenticationPrincipal Mono<UserDetails> userDetails) {
-//        return userDetails.map( p -> "Hello " + p.getName());
-//    }
-//
-//    @GetMapping("/exchange/principal")
-//    public Mono<String> exchangePrincipal(ServerWebExchange exchange) {
-//        return exchange.getPrincipal().map( p -> "Hello " + p.getName());
-//    }
 }

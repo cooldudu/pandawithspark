@@ -65,7 +65,7 @@ public final class HTMLCreater {
 
 		try {
 			// 创建和配置Configuration对象
-			Configuration cfg = new Configuration();
+			var cfg = new Configuration();
 
 			// 这只模板所在的目录
 			cfg.setServletContextForTemplateLoading(context, templatePath);
@@ -74,10 +74,10 @@ public final class HTMLCreater {
 			cfg.setObjectWrapper(new DefaultObjectWrapper());
 
 			// 获取一个模板
-			Template template = cfg.getTemplate(templateName, encoding);
+			var template = cfg.getTemplate(templateName, encoding);
 			template.setEncoding(encoding);
 			// TODO读取配置文件路径
-			File htmlFile = new File(statichtmlpath + htmlUrl);
+			var htmlFile = new File(statichtmlpath + htmlUrl);
 
 			Writer out = new BufferedWriter(new OutputStreamWriter(
 					new FileOutputStream(htmlFile), "UTF-8"));
@@ -94,13 +94,12 @@ public final class HTMLCreater {
 	/**
 	 * 删除静态文件
 	 *
-	 * @param context
-	 * @param urlPath
+	 * @param htmlPath
 	 * @throws WMSException
 	 */
 	@SuppressWarnings("unused")
 	public static boolean deleteHTML(String htmlPath) throws WMSException {
-		File htmlFile = new File(statichtmlpath + htmlPath);
+		var htmlFile = new File(statichtmlpath + htmlPath);
 
 		if (htmlFile == null) {
 			throw new WMSException("读取文件失败");
@@ -113,12 +112,12 @@ public final class HTMLCreater {
 	/**
 	 * 获取静态文件存放路径
 	 *
-	 * @param classType
+	 * @param date
 	 *            实体类型的类型名称
 	 * @return
 	 */
 	public static String getHtmlPath(Date date) {
-		Calendar calendar = Calendar.getInstance();
+		var calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		return StaticData.BACKSLASH_CHARACTER + HOUSESOURCEREQUIRMENT_PAGE_PATH
 				+ StaticData.BACKSLASH_CHARACTER + calendar.get(Calendar.YEAR)
@@ -129,7 +128,7 @@ public final class HTMLCreater {
 	}
 
 	public static String getHtmlPath1(Date date) {
-		Calendar calendar = Calendar.getInstance();
+		var calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		return StaticData.BACKSLASH_CHARACTER + HOUSESOURCE_PAGE_PATH
 				+ StaticData.BACKSLASH_CHARACTER + calendar.get(Calendar.YEAR)
@@ -152,7 +151,7 @@ public final class HTMLCreater {
 	 */
 	public static void createFileDir(String fileName) throws WMSException {
 		// 读取配置文件路径
-		File htmlFile = new File(statichtmlpath
+		var htmlFile = new File(statichtmlpath
 				+ StaticData.BACKSLASH_CHARACTER + SPDB_PAGE_PATH
 				+ StaticData.BACKSLASH_CHARACTER);
 
@@ -171,7 +170,7 @@ public final class HTMLCreater {
 	 * @param templatePath
 	 * @param templateName
 	 * @param encoding
-	 * @param htmlUrl
+	 * @param targetHtmlName
 	 * @throws WMSException
 	 */
 	public static void createSimplePage(ServletContext context,
@@ -184,11 +183,11 @@ public final class HTMLCreater {
 	}
 
 	public static void createField(Date date) throws WMSException {
-		Calendar calendar = Calendar.getInstance();
+		var calendar = Calendar.getInstance();
 
 		calendar.setTime(date);
 		// 读取配置文件路径
-		File htmlFile = new File(statichtmlpath
+		var htmlFile = new File(statichtmlpath
 				+ StaticData.BACKSLASH_CHARACTER
 				+ HOUSESOURCEREQUIRMENT_PAGE_PATH
 				+ StaticData.BACKSLASH_CHARACTER);
@@ -199,7 +198,7 @@ public final class HTMLCreater {
 				throw new WMSException("静态页面路径创建失败！");
 			}
 
-			File htmlFile1 = new File(statichtmlpath
+			var htmlFile1 = new File(statichtmlpath
 					+ StaticData.BACKSLASH_CHARACTER
 					+ HOUSESOURCEREQUIRMENT_PAGE_PATH
 					+ StaticData.BACKSLASH_CHARACTER
@@ -210,7 +209,7 @@ public final class HTMLCreater {
 				if (!htmlFile1.mkdirs()) {
 					throw new WMSException("静态页面路径创建失败！");
 				}
-				File htmlFile2 = new File(statichtmlpath
+				var htmlFile2 = new File(statichtmlpath
 						+ StaticData.BACKSLASH_CHARACTER
 						+ HOUSESOURCEREQUIRMENT_PAGE_PATH
 						+ StaticData.BACKSLASH_CHARACTER
@@ -222,7 +221,7 @@ public final class HTMLCreater {
 					if (!htmlFile2.mkdirs()) {
 						throw new WMSException("静态页面路径创建失败！");
 					}
-					File htmlFile3 = new File(statichtmlpath
+					var htmlFile3 = new File(statichtmlpath
 							+ StaticData.BACKSLASH_CHARACTER
 							+ HOUSESOURCEREQUIRMENT_PAGE_PATH
 							+ StaticData.BACKSLASH_CHARACTER
@@ -240,7 +239,7 @@ public final class HTMLCreater {
 				}
 			}
 		} else {
-			File htmlFile1 = new File(statichtmlpath
+			var htmlFile1 = new File(statichtmlpath
 					+ StaticData.BACKSLASH_CHARACTER
 					+ HOUSESOURCEREQUIRMENT_PAGE_PATH
 					+ StaticData.BACKSLASH_CHARACTER
@@ -250,7 +249,7 @@ public final class HTMLCreater {
 				if (!htmlFile1.mkdirs()) {
 					throw new WMSException("静态页面路径创建失败！");
 				}
-				File htmlFile2 = new File(statichtmlpath
+				var htmlFile2 = new File(statichtmlpath
 						+ StaticData.BACKSLASH_CHARACTER
 						+ HOUSESOURCEREQUIRMENT_PAGE_PATH
 						+ StaticData.BACKSLASH_CHARACTER
@@ -262,7 +261,7 @@ public final class HTMLCreater {
 					if (!htmlFile2.mkdirs()) {
 						throw new WMSException("静态页面路径创建失败！");
 					}
-					File htmlFile3 = new File(statichtmlpath
+					var htmlFile3 = new File(statichtmlpath
 							+ StaticData.BACKSLASH_CHARACTER
 							+ HOUSESOURCEREQUIRMENT_PAGE_PATH
 							+ StaticData.BACKSLASH_CHARACTER
@@ -279,7 +278,7 @@ public final class HTMLCreater {
 					}
 				}
 			} else {
-				File htmlFile2 = new File(statichtmlpath
+				var htmlFile2 = new File(statichtmlpath
 						+ StaticData.BACKSLASH_CHARACTER
 						+ HOUSESOURCEREQUIRMENT_PAGE_PATH
 						+ StaticData.BACKSLASH_CHARACTER
@@ -291,7 +290,7 @@ public final class HTMLCreater {
 					if (!htmlFile2.mkdirs()) {
 						throw new WMSException("静态页面路径创建失败！");
 					}
-					File htmlFile3 = new File(statichtmlpath
+					var htmlFile3 = new File(statichtmlpath
 							+ StaticData.BACKSLASH_CHARACTER
 							+ HOUSESOURCEREQUIRMENT_PAGE_PATH
 							+ StaticData.BACKSLASH_CHARACTER
@@ -307,7 +306,7 @@ public final class HTMLCreater {
 						}
 					}
 				} else {
-					File htmlFile3 = new File(statichtmlpath
+					var htmlFile3 = new File(statichtmlpath
 							+ StaticData.BACKSLASH_CHARACTER
 							+ HOUSESOURCEREQUIRMENT_PAGE_PATH
 							+ StaticData.BACKSLASH_CHARACTER
@@ -329,11 +328,11 @@ public final class HTMLCreater {
 
 	public static void createField1(Date date) throws WMSException {
 
-		Calendar calendar = Calendar.getInstance();
+		var calendar = Calendar.getInstance();
 
 		calendar.setTime(date);
 		// 读取配置文件路径
-		File htmlFile = new File(statichtmlpath
+		var htmlFile = new File(statichtmlpath
 				+ StaticData.BACKSLASH_CHARACTER + HOUSESOURCE_PAGE_PATH
 				+ StaticData.BACKSLASH_CHARACTER);
 
@@ -343,7 +342,7 @@ public final class HTMLCreater {
 				throw new WMSException("静态页面路径创建失败！");
 			}
 
-			File htmlFile1 = new File(statichtmlpath
+			var htmlFile1 = new File(statichtmlpath
 					+ StaticData.BACKSLASH_CHARACTER + HOUSESOURCE_PAGE_PATH
 					+ StaticData.BACKSLASH_CHARACTER
 					+ calendar.get(Calendar.YEAR)
@@ -353,7 +352,7 @@ public final class HTMLCreater {
 				if (!htmlFile1.mkdirs()) {
 					throw new WMSException("静态页面路径创建失败！");
 				}
-				File htmlFile2 = new File(statichtmlpath
+				var htmlFile2 = new File(statichtmlpath
 						+ StaticData.BACKSLASH_CHARACTER
 						+ HOUSESOURCE_PAGE_PATH
 						+ StaticData.BACKSLASH_CHARACTER
@@ -365,7 +364,7 @@ public final class HTMLCreater {
 					if (!htmlFile2.mkdirs()) {
 						throw new WMSException("静态页面路径创建失败！");
 					}
-					File htmlFile3 = new File(statichtmlpath
+					var htmlFile3 = new File(statichtmlpath
 							+ StaticData.BACKSLASH_CHARACTER
 							+ HOUSESOURCE_PAGE_PATH
 							+ StaticData.BACKSLASH_CHARACTER
@@ -383,7 +382,7 @@ public final class HTMLCreater {
 				}
 			}
 		} else {
-			File htmlFile1 = new File(statichtmlpath
+			var htmlFile1 = new File(statichtmlpath
 					+ StaticData.BACKSLASH_CHARACTER + HOUSESOURCE_PAGE_PATH
 					+ StaticData.BACKSLASH_CHARACTER
 					+ calendar.get(Calendar.YEAR)
@@ -392,7 +391,7 @@ public final class HTMLCreater {
 				if (!htmlFile1.mkdirs()) {
 					throw new WMSException("静态页面路径创建失败！");
 				}
-				File htmlFile2 = new File(statichtmlpath
+				var htmlFile2 = new File(statichtmlpath
 						+ StaticData.BACKSLASH_CHARACTER
 						+ HOUSESOURCE_PAGE_PATH
 						+ StaticData.BACKSLASH_CHARACTER
@@ -404,7 +403,7 @@ public final class HTMLCreater {
 					if (!htmlFile2.mkdirs()) {
 						throw new WMSException("静态页面路径创建失败！");
 					}
-					File htmlFile3 = new File(statichtmlpath
+					var htmlFile3 = new File(statichtmlpath
 							+ StaticData.BACKSLASH_CHARACTER
 							+ HOUSESOURCE_PAGE_PATH
 							+ StaticData.BACKSLASH_CHARACTER
@@ -421,7 +420,7 @@ public final class HTMLCreater {
 					}
 				}
 			} else {
-				File htmlFile2 = new File(statichtmlpath
+				var htmlFile2 = new File(statichtmlpath
 						+ StaticData.BACKSLASH_CHARACTER
 						+ HOUSESOURCE_PAGE_PATH
 						+ StaticData.BACKSLASH_CHARACTER
@@ -433,7 +432,7 @@ public final class HTMLCreater {
 					if (!htmlFile2.mkdirs()) {
 						throw new WMSException("静态页面路径创建失败！");
 					}
-					File htmlFile3 = new File(statichtmlpath
+					var htmlFile3 = new File(statichtmlpath
 							+ StaticData.BACKSLASH_CHARACTER
 							+ HOUSESOURCE_PAGE_PATH
 							+ StaticData.BACKSLASH_CHARACTER
@@ -449,7 +448,7 @@ public final class HTMLCreater {
 						}
 					}
 				} else {
-					File htmlFile3 = new File(statichtmlpath
+					var htmlFile3 = new File(statichtmlpath
 							+ StaticData.BACKSLASH_CHARACTER
 							+ HOUSESOURCE_PAGE_PATH
 							+ StaticData.BACKSLASH_CHARACTER

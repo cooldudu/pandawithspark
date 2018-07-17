@@ -18,16 +18,16 @@ import org.springframework.web.server.ServerWebExchange;
 public class RequestUtil {
 	private static final ThreadLocal<String> threadLocal = new ThreadLocal<String>();
 	public static String getBasePath() {
-		String basePath = threadLocal.get();
+		var basePath = threadLocal.get();
 		return basePath;
 	}
 
 	public static String makeParamUrl(Map<String, String> map) {
-		StringBuffer result = new StringBuffer();
+		var result = new StringBuffer();
 		if (!ObjectUtils.isEmpty(map)) {
-			for (Map.Entry<String,String> entity : map.entrySet()) {
-				String key = entity.getKey();
-				String value = entity.getValue();
+			for (var entity : map.entrySet()) {
+				var key = entity.getKey();
+				var value = entity.getValue();
 				if(ObjectUtils.isNotEmpty(result)){
 					result.append("&"+key+"="+value);
 				}else{
@@ -39,13 +39,13 @@ public class RequestUtil {
 	}
 
 	public static String getBrowser(ServerWebExchange exchange){
-		String Agent = exchange.getRequest().getHeaders().get("User-Agent").get(StaticData.FIRST);
+		var Agent = exchange.getRequest().getHeaders().get("User-Agent").get(StaticData.FIRST);
 		Map info = Classifier.parse(Agent);
 		return (String) info.get("name");
 	}
 
 	public static String getOs(ServerWebExchange exchange){
-		String Agent = exchange.getRequest().getHeaders().get("User-Agent").get(StaticData.FIRST);
+		var Agent = exchange.getRequest().getHeaders().get("User-Agent").get(StaticData.FIRST);
 		Map info = Classifier.parse(Agent);
 		return (String) info.get("os");
 	}

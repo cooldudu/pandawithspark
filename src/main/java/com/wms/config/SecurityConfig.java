@@ -35,7 +35,7 @@ public class SecurityConfig {
 
 	@Bean
 	public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) throws Exception{
-		AuthenticationWebFilter authentication =
+		var authentication =
 				new AuthenticationWebFilter(new UserDetailsRepositoryReactiveAuthenticationManager(userDetailsService()));
 		http
 				.authorizeExchange()
@@ -70,15 +70,15 @@ public class SecurityConfig {
 	}
 
 	private boolean pageInvocationFilter(GrantedAuthority ga, AuthorizationContext context){
-		String authority = ga.getAuthority();
-		IJdbcDao jdbcDao = (IJdbcDao)new ApplicationContextUtil().getApplicationContext().getBean("jdbcDao");
-		final String queryPageInvocationsStatement = "select * from t_pageinvocations where url = '?'";
+		var authority = ga.getAuthority();
+		var jdbcDao = (IJdbcDao)new ApplicationContextUtil().getApplicationContext().getBean("jdbcDao");
+		final var queryPageInvocationsStatement = "select * from t_pageinvocations where url = '?'";
 		Map<String,Object> pageInvocation = null;
 		try{pageInvocation = jdbcDao.queryForMap(queryPageInvocationsStatement.replace("?",context.getExchange().getRequest().getURI().getPath()));}catch (Exception e){}
 		String roles = null;
 		if(ObjectUtils.isNotEmpty(pageInvocation)) {
 			roles = pageInvocation.get("roles").toString();
-				for(String role : roles.split(",")){
+				for(var role : roles.split(",")){
 					if(authority.equals(role)){
 						return true;
 					}

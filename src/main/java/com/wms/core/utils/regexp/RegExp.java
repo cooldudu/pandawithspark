@@ -12,7 +12,7 @@ public class RegExp {
     }
 
     public List<String> find(String reg, String str) {
-        Matcher matcher = Pattern.compile(reg).matcher(str);
+        var matcher = Pattern.compile(reg).matcher(str);
         List<String> list = new ArrayList<String>();
         while (matcher.find()) {
             list.add(matcher.group());
@@ -21,7 +21,7 @@ public class RegExp {
     }
 
     public List<String> find(String reg, String str, int index) {
-        Matcher matcher = Pattern.compile(reg).matcher(str);
+        var matcher = Pattern.compile(reg).matcher(str);
         List<String> list = new ArrayList<String>();
         while (matcher.find()) {
             list.add(matcher.group(index));
@@ -31,7 +31,7 @@ public class RegExp {
 
     public String findString(String reg, String str, int index) {
         String returnStr = null;
-        List<String> list = this.find(reg, str, index);
+        var list = this.find(reg, str, index);
         if (list.size() != 0)
             returnStr = list.get(0);
         return returnStr;
@@ -39,7 +39,7 @@ public class RegExp {
 
     public String findString(String reg, String str) {
         String returnStr = null;
-        List<String> list = this.find(reg, str);
+        var list = this.find(reg, str);
         if (list.size() != 0)
             returnStr = list.get(0);
         return returnStr;

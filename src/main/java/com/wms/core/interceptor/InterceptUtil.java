@@ -21,7 +21,7 @@ public class InterceptUtil {
                                       int index) throws IllegalArgumentException, SecurityException,
             IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-        Object[] args = proceedingJoinPoint.getArgs();
+        var args = proceedingJoinPoint.getArgs();
         return args[index - 1];
     }
 
@@ -29,7 +29,7 @@ public class InterceptUtil {
                                     int index, Object value) throws IllegalArgumentException,
             SecurityException, IllegalAccessException,
             InvocationTargetException, NoSuchMethodException {
-        Object[] args = proceedingJoinPoint.getArgs();
+        var args = proceedingJoinPoint.getArgs();
         args[index - 1] = value;
     }
 
@@ -66,50 +66,49 @@ public class InterceptUtil {
     public static String getCurrentUserName(
             ProceedingJoinPoint proceedingJoinPoint)
             throws Exception {
-        Object[] args = proceedingJoinPoint.getArgs();
-        for (Object arg : args) {
+        var args = proceedingJoinPoint.getArgs();
+        for (var arg : args) {
             if (arg instanceof Principal) {
-                Principal principal = (Principal) arg;
+                var principal = (Principal) arg;
                 return principal.getName();
             } else if (arg instanceof UserDetails) {
-                UserDetails userDetails = (UserDetails) arg;
+                var userDetails = (UserDetails) arg;
                 return userDetails.getUsername();
             }
         }
         return "";
     }
 
-    public static String getOperaterDesc(ProceedingJoinPoint proceedingJoinPoint)
-            throws Exception {
-        MethodSignature signature = (MethodSignature) proceedingJoinPoint
+    public static String getOperaterDesc(ProceedingJoinPoint proceedingJoinPoint){
+        var signature = (MethodSignature) proceedingJoinPoint
                 .getSignature();
-        Method method = signature.getMethod();
-        MakeLog annotation = (MakeLog) method
+        var method = signature.getMethod();
+        var annotation = method
                 .getAnnotation(MakeLog.class);
         if (ObjectUtils.isNotEmpty(annotation)) {
-            String logContent = annotation.logContent();
+            var logContent = annotation.logContent();
             try {
-                Object[] args = proceedingJoinPoint.getArgs();
-                String[] names = signature.getParameterNames();
+                var args = proceedingJoinPoint.getArgs();
+                var names = signature.getParameterNames();
                 Map<String, Object> params = new HashMap<String, Object>();
-                for (int i = 0; i < names.length; i++) {
+                for (var i = 0; i < names.length; i++) {
                     params.put(names[i], args[i]);
                 }
-                String reg = "(?<=(?<!\\\\)\\$\\{)(.*?)(?=(?<!\\\\)\\})";
-                RegExp re = new RegExp();
-                List<String> list = re.find(reg, logContent);
-                for (String key : list) {
+                var reg = "(?<=(?<!\\\\)\\$\\{)(.*?)(?=(?<!\\\\)\\})";
+                var re = new RegExp();
+                var list = re.find(reg, logContent);
+                for (var key : list) {
                     Object value = null;
                     if (key.indexOf(".") == -1) {
                         value = params.get(key);
                     } else {
-                        String[] keys = key.split("\\.");
+                        var keys = key.split("\\.");
                         value = params.get(keys[0]);
-                        for (int j = 1; j < keys.length; j++) {
+                        for (var j = 1; j < keys.length; j++) {
                             if (keys[j].indexOf("(") != -1 || keys[j].indexOf(")") != -1) {
                                 throw new Exception("You needn't write () on function.");
                             }
-                            Method tmp = value.getClass().getMethod(keys[j]);
+                            var tmp = value.getClass().getMethod(keys[j]);
                             value = tmp.invoke(value);
                         }
                     }

@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.wms.core.annotation.MakeLog;
 import com.wms.core.utils.common.ObjectUtils;
 import com.wms.core.utils.common.StringUtil;
+import org.springframework.web.server.ServerWebExchange;
 
 public class InterceptUtil {
     public static Object getMethodArg(ProceedingJoinPoint proceedingJoinPoint,
@@ -64,8 +65,7 @@ public class InterceptUtil {
     }
 
     public static String getCurrentUserName(
-            ProceedingJoinPoint proceedingJoinPoint)
-            throws Exception {
+            ProceedingJoinPoint proceedingJoinPoint){
         var args = proceedingJoinPoint.getArgs();
         for (var arg : args) {
             if (arg instanceof Principal) {
@@ -77,6 +77,16 @@ public class InterceptUtil {
             }
         }
         return "";
+    }
+
+    public static ServerWebExchange getExchange(ProceedingJoinPoint proceedingJoinPoint)throws Exception{
+        var args = proceedingJoinPoint.getArgs();
+        for(var arg:args){
+            if(arg instanceof ServerWebExchange){
+                return (ServerWebExchange)arg;
+            }
+        }
+        return null;
     }
 
     public static String getOperaterDesc(ProceedingJoinPoint proceedingJoinPoint){

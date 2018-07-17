@@ -51,7 +51,7 @@ public class SecurityConfig {
 				"/**/*.rar", "/**/*.tiff", "/**/*.txt", "/**/*.url",
 				"/**/*.vsd", "/**/*.wav", "/**/*.wma", "/**/*.wmv",
 				"/**/*.dll", "/**/*.jnilib", "/**/*.dylib", "/**/*.so",
-				"/**/*.zip", "/**/*.json","/login","/favicon.ico")
+				"/**/*.zip", "/**/*.json","/login","/favicon.ico","/token/get")
 				.permitAll()
 				.and()
 				.addFilterAt(authentication, SecurityWebFiltersOrder.HTTP_BASIC)

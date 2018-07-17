@@ -1,6 +1,7 @@
 package com.wms.ui.example.controller;
 
 import com.wms.core.annotation.MakeLog;
+import com.wms.core.annotation.Token;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,10 +16,8 @@ public class Example2 {
 
     @GetMapping("/index")
     @MakeLog(logContent="have test ${principal.getName} split ${exchange.getRequest.getHeaders.getHost.getHostName}")
+    @Token
     public Mono<String> hello(ServerWebExchange exchange, Principal principal) {
-        //new UserRepo().findEntityById(1).map(r -> Json.toJson(r.get(),UserRepo.userFormat())).subscribe(System.out::println);
-        //new UserRepo().countEntity().subscribe(System.out::println);
         return Mono.just(principal.getName());
-        //return new UserRepo().findIdByUserNameWithExec("user4").collectList();
     }
 }

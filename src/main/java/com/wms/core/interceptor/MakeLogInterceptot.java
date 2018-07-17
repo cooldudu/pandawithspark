@@ -22,7 +22,7 @@ import java.sql.Timestamp;
 @Aspect
 @Component
 public class MakeLogInterceptot {
-    @Around("@annotation(org.springframework.web.bind.annotation.GetMapping)")
+    @Around("@annotation(com.wms.core.annotation.MakeLog)")
     public Object doExecute(ProceedingJoinPoint proceedingJoinPoint)
             throws Throwable {
         Object returnValue = null;
@@ -54,7 +54,7 @@ public class MakeLogInterceptot {
                     var log = new Log(begin, end, RequestUtil.getBrowser(request), RequestUtil.getOs(request),
                             spend, clazz.getName(), method.getName(), MacUtil.getIpAddr(request),
                             userName, InterceptUtil.getOperaterDesc(proceedingJoinPoint), Option.empty());
-                    new LogRepo().insertLog(log).block();
+                    new LogRepo().insertLog(log);
                 }
             }
         }

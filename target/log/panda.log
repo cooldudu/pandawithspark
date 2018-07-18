@@ -1,0 +1,21 @@
+2018-07-18 16:51:26,428 INFO [com.wms.Application] - Starting Application on DUDU-PC with PID 9548 (C:\Users\hasee\Desktop\panda\out\production\classes started by hasee in C:\Users\hasee\Desktop\panda)
+2018-07-18 16:51:26,429 INFO [com.wms.Application] - No active profile set, falling back to default profiles: default
+2018-07-18 16:51:26,479 INFO [org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebServerApplicationContext] - Refreshing org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebServerApplicationContext@7d6cb217: startup date [Wed Jul 18 16:51:26 CST 2018]; root of context hierarchy
+2018-07-18 16:51:28,051 INFO [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-07-18 16:51:29,100 INFO [org.springframework.web.reactive.result.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/login]}" onto java.lang.String com.wms.ui.example.controller.Example.login()
+2018-07-18 16:51:29,109 INFO [org.springframework.web.reactive.result.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/console/index],methods=[GET]}" onto public reactor.core.publisher.Mono<java.lang.String> com.wms.ui.example.controller.Example1.hello(org.springframework.web.server.ServerWebExchange,java.security.Principal)
+2018-07-18 16:51:29,118 INFO [org.springframework.web.reactive.result.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/manage/index],methods=[GET]}" onto public reactor.core.publisher.Mono<java.lang.String> com.wms.ui.example.controller.Example2.hello(org.springframework.web.server.ServerWebExchange,java.security.Principal)
+2018-07-18 16:51:29,120 INFO [org.springframework.web.reactive.result.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/token/get],methods=[GET]}" onto public reactor.core.publisher.Mono<java.lang.String> com.wms.ui.example.controller.TokenController.getToken(org.springframework.web.server.ServerWebExchange)
+2018-07-18 16:51:29,214 INFO [org.springframework.web.reactive.handler.SimpleUrlHandlerMapping] - Mapped URL path [/resources/**] onto handler of type [class org.springframework.web.reactive.resource.ResourceWebHandler]
+2018-07-18 16:51:29,297 INFO [org.springframework.web.reactive.result.method.annotation.ControllerMethodResolver] - Looking for @ControllerAdvice: org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebServerApplicationContext@7d6cb217: startup date [Wed Jul 18 16:51:26 CST 2018]; root of context hierarchy
+2018-07-18 16:51:29,897 INFO [org.springframework.web.reactive.result.view.freemarker.FreeMarkerConfigurer] - ClassTemplateLoader for Spring macros added to FreeMarker configuration
+2018-07-18 16:51:31,437 INFO [org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer] - LiveReload server is running on port 35729
+2018-07-18 16:51:31,475 INFO [org.springframework.jmx.export.annotation.AnnotationMBeanExporter] - Registering beans for JMX exposure on startup
+2018-07-18 16:51:31,476 INFO [org.springframework.jmx.export.annotation.AnnotationMBeanExporter] - Bean with name 'dataSource' has been autodetected for JMX exposure
+2018-07-18 16:51:31,482 INFO [org.springframework.jmx.export.annotation.AnnotationMBeanExporter] - Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+2018-07-18 16:51:31,487 INFO [org.springframework.context.support.DefaultLifecycleProcessor] - Starting beans in phase 2147483647
+2018-07-18 16:51:31,487 INFO [org.springframework.scheduling.quartz.SchedulerFactoryBean] - Starting Quartz Scheduler now
+2018-07-18 16:51:31,631 INFO [org.springframework.boot.web.embedded.undertow.UndertowServletWebServer] - Undertow started on port(s) 80 (http)
+2018-07-18 16:51:31,636 INFO [com.wms.Application] - Started Application in 6.408 seconds (JVM running for 8.412)
+2018-07-18 16:52:21,800 INFO [com.wms.ui.example.controller.Example1] - I came into the manage page.
+2018-07-18 16:52:37,551 WARN [org.apache.hadoop.util.NativeCodeLoader] - Unable to load native-hadoop library for your platform... using builtin-java classes where applicable

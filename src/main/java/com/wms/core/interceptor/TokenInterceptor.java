@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 @Aspect
-@Order(5)
+@Order(10)
 @Component
 public class TokenInterceptor {
 	@Around("@annotation(com.wms.core.annotation.Token)")

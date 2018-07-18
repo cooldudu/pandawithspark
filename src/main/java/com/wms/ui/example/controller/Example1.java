@@ -1,5 +1,6 @@
 package com.wms.ui.example.controller;
 
+import org.apache.commons.logging.LogFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,11 +12,11 @@ import java.security.Principal;
 @RestController
 @RequestMapping("/console")
 public class Example1 {
-
     @GetMapping("/index")
     public Mono<String> hello(ServerWebExchange exchange, Principal principal) {
         //new UserRepo().findEntityById(1).map(r -> Json.toJson(r.get(),UserRepo.userFormat())).subscribe(System.out::println);
         //new UserRepo().countEntity().subscribe(System.out::println);
+        LogFactory.getLog(Example1.class).info("I came into the manage page.");
         return Mono.just("hello");//principal.map( p ->p.getName());
         //return new UserRepo().findIdByUserNameWithExec("user4").collectList();
     }

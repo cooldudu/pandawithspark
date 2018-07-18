@@ -11,6 +11,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.server.ServerWebExchange;
@@ -20,6 +21,7 @@ import java.lang.reflect.Method;
 import java.sql.Timestamp;
 
 @Aspect
+@Order(30)
 @Component
 public class MakeLogInterceptot {
     @Around("@annotation(com.wms.core.annotation.MakeLog)")

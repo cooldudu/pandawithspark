@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono;
 import java.security.Principal;
 
 @RestController
-@RequestMapping("/console")
+@RequestMapping("/manage")
 public class Example1 {
     @GetMapping("/index")
     public Mono<String> hello(ServerWebExchange exchange, Principal principal) {

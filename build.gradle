@@ -79,10 +79,10 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-log4j2"
     compile "org.springframework:spring-aspects:5.0.7.RELEASE"
     compile "com.nimbusds:nimbus-jose-jwt:5.12"
-    compile "org.scala-lang:scala-library:2.11.12"
-    compile "org.scala-lang:scala-compiler:2.11.12"
-    compile "org.scala-lang:scala-reflect:2.11.12"
-    compile "org.scala-lang.modules:scala-java8-compat_2.11:0.9.0"
+    compile "org.scala-lang:scala-library:2.12.6"
+    compile "org.scala-lang:scala-compiler:2.12.6"
+    compile "org.scala-lang:scala-reflect:2.12.6"
+    compile "org.scala-lang.modules:scala-java8-compat_2.12:0.9.0"
     compile "javax.el:javax.el-api:3.0.0"
     compile "com.zaxxer:HikariCP:3.2.0"
     compile "org.apache.commons:commons-lang3:3.7"
@@ -91,47 +91,52 @@ dependencies {
     compile "org.apache.commons:commons-csv:1.5"
     compile "commons-net:commons-net:3.6"
     compile "com.jcraft:jsch:0.1.54"
-    compile "com.typesafe.slick:slick_2.11:3.2.3"
-    compile "com.typesafe.slick:slick-hikaricp_2.11:3.2.3"
-    compile "com.typesafe.slick:slick-codegen_2.11:3.2.3"
+    compile "com.typesafe.slick:slick_2.12:3.2.3"
+    compile "com.typesafe.slick:slick-hikaricp_2.12:3.2.3"
+    compile "com.typesafe.slick:slick-codegen_2.12:3.2.3"
     compile "org.slf4j:slf4j-nop:1.7.25"
-    compile "io.strongtyped:active-slick_2.11:0.3.5"
-    compile "com.typesafe.play:play-json_2.11:2.6.9"
-    compile "com.wix:accord-core_2.11:0.7.2"
-    compile "com.wix:accord-api_2.11:0.7.2"
+    compile "io.strongtyped:active-slick_2.12:0.3.5"
+    compile "com.typesafe.play:play-json_2.12:2.6.9"
+    compile "com.wix:accord-core_2.12:0.7.2"
+    compile "com.wix:accord-api_2.12:0.7.2"
     compile "is.tagomor.woothee:woothee-java:1.7.0"
     compile "net.coobird:thumbnailator:0.4.8"
     compile "io.netty:netty-all:4.1.25.Final"
     compile "joda-time:joda-time:2.9.2"
-    compile "org.apache.hadoop:hadoop-client:2.7.2"
-    compile "org.apache.hadoop:hadoop-mapreduce-client-core:2.7.2"
-    compile "org.apache.hadoop:hadoop-mapreduce-client-shuffle:2.7.2"
-    compile "org.apache.hadoop:hadoop-hdfs:2.7.2"
-    compile "org.apache.hadoop:hadoop-hdfs:2.7.2"
+    compile "org.apache.hadoop:hadoop-client:2.7.7"
+    compile "org.apache.hadoop:hadoop-mapreduce-client-core:2.7.7"
+    compile "org.apache.hadoop:hadoop-mapreduce-client-shuffle:2.7.7"
+    compile "org.apache.hadoop:hadoop-hdfs:2.7.7"
+    compile "com.thoughtworks.paranamer:paranamer:2.8"
+    compile "org.apache.kafka:kafka_2.12:2.1.1"
     runtime "mysql:mysql-connector-java:5.1.46"
     runtime "org.springframework.boot:spring-boot-devtools"
     runtime "org.codehaus.jackson:jackson-mapper-asl:1.9.13"
-    providedRuntime ("org.apache.spark:spark-core_2.11:2.3.1"){
+    providedRuntime ("org.apache.spark:spark-core_2.12:2.4.0"){
         exclude group:"org.slf4j"
         exclude group:"log4j"
     }
-    providedRuntime ("org.apache.spark:spark-sql_2.11:2.3.1"){
+    providedRuntime ("org.apache.spark:spark-sql_2.12:2.4.0"){
         exclude group:"org.slf4j"
         exclude group:"log4j"
     }
-    providedRuntime ("org.apache.spark:spark-streaming_2.11:2.3.1"){
+    providedRuntime ("org.apache.spark:spark-streaming_2.12:2.4.0"){
         exclude group:"org.slf4j"
         exclude group:"log4j"
     }
-    providedRuntime ("org.apache.spark:spark-yarn_2.11:2.3.1"){
+    providedRuntime ("org.apache.spark:spark-yarn_2.12:2.4.0"){
         exclude group:"org.slf4j"
         exclude group:"log4j"
     }
-    providedRuntime ("org.apache.spark:spark-mllib_2.11:2.3.1"){
+    providedRuntime ("org.apache.spark:spark-mllib_2.12:2.4.0"){
         exclude group:"org.slf4j"
         exclude group:"log4j"
     }
-    providedRuntime ("org.apache.spark:spark-hive_2.11:2.3.1"){
+    providedRuntime ("org.apache.spark:spark-hive_2.12:2.4.0"){
+        exclude group:"org.slf4j"
+        exclude group:"log4j"
+    }
+    providedRuntime ("org.apache.spark:spark-streaming-kafka-0-10_2.12:2.4.0"){
         exclude group:"org.slf4j"
         exclude group:"log4j"
     }

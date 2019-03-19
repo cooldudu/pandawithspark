@@ -54,10 +54,12 @@ public class MapReactiveUserDetailsService implements ReactiveUserDetailsService
         var roles = new ArrayList<String>();
         UserDetails user = null;
         final var getUserListQuery = "select * from t_accounts t where t.username= '?'";
-        final var getAuthoritiesByUsernameQuery = "select u.username,r.rname from t_authorities a inner join t_accounts u on a.account_id=u.id inner join t_roles r on a.role_id=r.id where u.username= '?'";
+        final var getAuthoritiesByUsernameQuery = "select u.username,r.rolename from t_authorities a inner join t_accounts u on a.account_id=u.id inner join t_roles r on a.role_id=r.id where u.username= '?'";
         try {
             userRs = jdbcDao.queryForMap(getUserListQuery.replace("?", username));
-        }catch (WMSException ex){}
+        }catch (WMSException ex){
+            return Mono.empty();
+        }
 
         if(ObjectUtils.isNotEmpty(userRs)){
                 var userName = userRs.get("username").toString();
@@ -68,12 +70,12 @@ public class MapReactiveUserDetailsService implements ReactiveUserDetailsService
                 }
                 if(ObjectUtils.isNotEmpty(authorityRs)) {
                     for (var authority : authorityRs) {
-                        roles.add(authority.get("rname").toString());
+                        roles.add(authority.get("rolename").toString());
                     }
                     var ud = User.builder().username(userName).password(userRs.get("password").toString())
-                            .disabled((Boolean) userRs.get("ENABLED")).accountExpired((Boolean) userRs.get("ISACCOUNTNONEXPIRED"))
-                            .accountLocked((Boolean) userRs.get("ISACCOUNTNONLOCKED"))
-                            .credentialsExpired((Boolean) userRs.get("ISCREDENTIALSNONEXPIRED"))
+                            .disabled((Boolean) userRs.get("enabled")).accountExpired((Boolean) userRs.get("isAccoumtNonExpired"))
+                            .accountLocked((Boolean) userRs.get("isAccountNonLocked"))
+                            .credentialsExpired((Boolean) userRs.get("isCredentialsNonExpired"))
                             .roles(roles.toArray(new String[roles.size()]))
                             .passwordEncoder(password -> "{bcrypt}" + password)
                             .build();
